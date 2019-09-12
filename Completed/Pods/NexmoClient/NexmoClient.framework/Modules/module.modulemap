@@ -1,0 +1,6 @@
+framework module NexmoClient {
+  umbrella header "NexmoClient.h"
+
+  export *
+  module * { export * }
+}
