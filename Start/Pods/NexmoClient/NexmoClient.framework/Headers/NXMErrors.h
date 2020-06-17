@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, NXMErrorCode) {
     NXMErrorCodeNone,
 
     NXMErrorCodeUnknown,
-    
+
     NXMErrorCodeSessionUnknown,
     NXMErrorCodeSessionInvalid,           // @"system:error:invalid-session"
     NXMErrorCodeSessionDisconnected,
@@ -34,11 +34,13 @@ typedef NS_ENUM(NSInteger, NXMErrorCode) {
     NXMErrorCodeEventInvalid,             // @"conversation:error:invalid-event"
     NXMErrorCodeEventBadPermission,
     NXMErrorCodeEventNotFound,
+    NXMErrorCodeEventsPageNotFound,
     
     NXMErrorCodeConversationRetrievalFailed,
     NXMErrorCodeConversationNotFound,
     NXMErrorCodeConversationInvalidMember,
     NXMErrorCodeConversationExpired,
+    NXMErrorCodeConversationsPageNotFound,
     
     NXMErrorCodeMediaNotSupported,
     NXMErrorCodeMediaNotFound,
@@ -47,7 +49,7 @@ typedef NS_ENUM(NSInteger, NXMErrorCode) {
     NXMErrorCodeMediaBadRequest,
     NXMErrorCodeMediaInternalError,
     
-    NXMErrorCodePushNotAStitchPush,
+    NXMErrorCodePushNotANexmoPush,
     NXMErrorCodePushParsingFailed,
     
     NXMErrorCodeNotImplemented,
@@ -55,6 +57,7 @@ typedef NS_ENUM(NSInteger, NXMErrorCode) {
     NXMErrorCodePayloadTooBig,
     
     NXMErrorCodeSDKDisconnected,
+    NXMErrorCodeUserNotFound,   // @"user:error:not-found"
     
     NXMErrorCodeDTMFIllegal
 };

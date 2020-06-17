@@ -9,6 +9,6 @@
 #import "NXMEnums.h"
 
 @interface NXMTextTypingEvent : NXMEvent
-@property (nonatomic) NXMTextTypingEventStatus status;
+@property (nonatomic, readonly) NXMTextTypingEventStatus status;
 @end
 

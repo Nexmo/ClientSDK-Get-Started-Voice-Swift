@@ -11,5 +11,6 @@
 #import "NXMMediaSettings.h"
 
 @interface NXMMediaEvent : NXMEvent
-@property (nonatomic) NXMMediaSettings *mediaSettings; //TODO: add support to multiple media types
+@property (nonatomic, readonly) bool isEnabled;
+@property (nonatomic, readonly) bool isSuspended;
 @end

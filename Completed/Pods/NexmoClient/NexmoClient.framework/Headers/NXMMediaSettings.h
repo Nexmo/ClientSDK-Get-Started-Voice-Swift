@@ -8,7 +8,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NXMMediaSettings : NSObject
-@property bool isEnabled;
-@property bool isSuspended;
+
+@property (nonatomic, readonly) bool isEnabled;
+@property (nonatomic, readonly) bool isSuspended;
 
 @end

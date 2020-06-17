@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, NXMCallHandler) {
  * @param dtmf A NSString which represent the dtmf value.
  * @param callMember A NXMCallMember which the dtmf received from.
  */
-- (void)call:(nonnull NXMCall *)call didReceive:(nonnull NSString *)dtmf fromCallMember:(nonnull NXMCallMember *)callMember;
+- (void)call:(nonnull NXMCall *)call didReceive:(nonnull NSString *)dtmf fromCallMember:(nullable NXMCallMember *)callMember;
 @end
 
 

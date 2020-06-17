@@ -24,10 +24,4 @@ FOUNDATION_EXPORT const unsigned char NexmoClientVersionString[];
 #import <NexmoClient/NXMCallMember.h>
 #import <NexmoClient/NXMErrors.h>
 #import <NexmoClient/NXMLogger.h>
-
-
-
-
-
-
-
+#import <NexmoClient/NXMHelper.h>

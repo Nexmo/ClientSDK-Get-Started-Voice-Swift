@@ -20,8 +20,16 @@ typedef NS_ENUM(NSInteger, NXMConnectionStatusReason) {
     NXMConnectionStatusReasonTokenRefreshed,
     NXMConnectionStatusReasonTokenInvalid,
     NXMConnectionStatusReasonTokenExpired,
+    NXMConnectionStatusReasonUserNotFound,
     NXMConnectionStatusReasonTerminated
 };
+
+
+typedef NS_ENUM(NSInteger, NXMPushTemplate) {
+    NXMPushTemplateDefault,
+    NXMPushTemplateCustom
+};
+
 
 typedef NS_ENUM(NSInteger, NXMMemberUpdateType) {
     NXMMemberUpdateTypeState,
@@ -35,10 +43,6 @@ typedef NS_ENUM(NSInteger, NXMMediaType) {
     NXMMediaTypeVideo = (1 << 1)
 };
 
-typedef NS_ENUM(NSInteger, NXMMediaActionType) {
-    NXMMediaActionTypeSuspend
-};
-
 typedef NS_ENUM(NSInteger, NXMEventType) {
     NXMEventTypeGeneral,
     NXMEventTypeCustom,
@@ -47,11 +51,11 @@ typedef NS_ENUM(NSInteger, NXMEventType) {
     NXMEventTypeMessageStatus,
     NXMEventTypeTextTyping,
     NXMEventTypeMedia,
-    NXMEventTypeMediaAction,
     NXMEventTypeMember,
     NXMEventTypeSip,
     NXMEventTypeDTMF,
-    NXMEventTypeLegStatus
+    NXMEventTypeLegStatus,
+    NXMEventTypeUnknown
 };
 
 typedef NS_ENUM(NSInteger, NXMSipStatus){
@@ -112,6 +116,11 @@ typedef NS_ENUM(NSInteger, NXMLegType) {
     NXMLegTypeApp,
     NXMLegTypePhone,
     NXMLegTypeUnknown
+};
+
+typedef NS_ENUM(NSInteger, NXMPageOrder) {
+    NXMPageOrderAsc,
+    NXMPageOrderDesc
 };
 
 

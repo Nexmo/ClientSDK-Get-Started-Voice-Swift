@@ -10,6 +10,9 @@
 #import "NXMClientDelegate.h"
 #import "NXMConversation.h"
 #import "NXMCall.h"
+#import "NXMConversationsPage.h"
+#import "NXMClientConfig.h"
+#import "NXMPushPayload.h"
 
 /*!
  * @brief You use a <i>NXMClient</i> instance to utilise the services provided by NexmoConversation API in your app.
@@ -79,14 +82,33 @@
  */
 @property (nonatomic, readonly, nullable, getter=getToken) NSString *authToken;
 
+/*!
+ * @brief Get NXMClient.shared configuration
+ * @code NXMClientConfig config = NXMClient.shared.configuration;
+ */
+@property (nonatomic, readonly, nullable, getter=getConfiguration) NXMClientConfig *configuration;
+
+
+/*!
+ * @brief Set shared NXMClient configuration. Must be called before [NXMClient shared].
+ * @code [NXMClient setConfiguration:myConfiguration];
+ * @param configuration NXMClient configuration object.
+ */
++ (void)setConfiguration:(nonnull NXMClientConfig *)configuration;
 
 /*!
  * @brief Set NXMClient delegate
  * @code [myNXNClient setDelegate:clientDelegate];
- *  @param delegate a `NXMClientDelegate` object.
+ * @param delegate a `NXMClientDelegate` object.
  */
 - (void)setDelegate:(nonnull id <NXMClientDelegate>)delegate;
 
+/*!
+* @brief Check if the login connection status is connected
+* @code [myNXNClient isConnected];
+* @return YES if connected.
+*/
+- (BOOL)isConnected;
 
 /*!
  * @brief login with current authToken the response in NXMClientDelegate:didChangeConnectionStatus
@@ -116,13 +138,13 @@
  @brief getConversation With a specific Id
  @param uuid     conversation id
  @param completionHandler         completion block
- @code [myNXNClient getConversationWithUUid:conversationId completion:(void(^_Nullable)(NSError * _Nullable error, NXMConversation * _Nullable conversation))completion{
+ @code [myNXNClient getConversationWithUuid:conversationId completion:(void(^_Nullable)(NSError * _Nullable error, NXMConversation * _Nullable conversation))completion{
  if (!error){
         NXMConversation myConversation = conversation;
     }
  }];
  */
-- (void)getConversationWithUUid:(nonnull NSString *)uuid
+- (void)getConversationWithUuid:(nonnull NSString *)uuid
               completionHandler:(void(^_Nullable)(NSError * _Nullable error, NXMConversation * _Nullable conversation))completionHandler;
 
 
@@ -137,6 +159,36 @@
  */
 - (void)createConversationWithName:(nonnull NSString *)name
                  completionHandler:(void(^_Nullable)(NSError * _Nullable error, NXMConversation * _Nullable conversation))completionHandler;
+
+
+/**
+ @brief Get conversations page
+ @param size              page size
+ @param order             page order
+ @param completionHandler completion block
+ @code [myNXNClient getConversationsPageWithSize:size order:pageOrder completionHandler:^(NSError * _Nullable error, NXMConversationsPage * _Nullable page) {
+ if (!error) { NXMConversationsPage *myPage = page; }
+ }];
+ */
+- (void)getConversationsPageWithSize:(NSInteger)size
+                               order:(NXMPageOrder)order
+                   completionHandler:(void(^_Nullable)(NSError * _Nullable error, NXMConversationsPage * _Nullable page))completionHandler OBJC_DEPRECATED("use getConversationsPageWithSize:(NSInteger) order:(NXMPageOrder) filter:(NSString*) completionHandler instead");
+
+/**
+ @brief Get conversations page
+ @param size              page size
+ @param order             page order
+ @param filter            @"LEFT", @"INVITED" or @"JOINED"
+ @param completionHandler completion block
+ @code [myNXNClient getConversationsPageWithSize:size order:pageOrder filter:filter completionHandler:^(NSError * _Nullable error, NXMConversationsPage * _Nullable page) {
+ if (!error) { NXMConversationsPage *myPage = page; }
+ }];
+ */
+- (void)getConversationsPageWithSize:(NSInteger)size
+                               order:(NXMPageOrder)order
+                              filter:(NSString*_Nullable)filter
+                   completionHandler:(void(^_Nullable)(NSError * _Nullable error, NXMConversationsPage * _Nullable page))completionHandler;
+
 
 #pragma mark - Call
 
@@ -158,17 +210,17 @@ completionHandler:(void(^_Nullable)(NSError * _Nullable error, NXMCall * _Nullab
 
 /**
  @brief  Enable push notification for specific device
- @param deviceToken     the device token
- @param isPushKit       is the app using PushKit
+ @param pushKitToken     the pushKit token
+ @param userNotificationToken       user notifications token
  @param isSandbox       is apple sandbox enviroment
  @param completionHandler      completion block
  @code [myNXNClient enablePushNotificationsWithDeviceToken:deviceToken isPushKit:isPushKit isSandbox:isSandbox completion:(void(^_Nullable)(NSError * _Nullable error))completion{
  }];
  */
-- (void)enablePushNotificationsWithDeviceToken:(nonnull NSData *)deviceToken
-                                     isPushKit:(BOOL)isPushKit
-                                     isSandbox:(BOOL)isSandbox
-                             completionHandler:(void(^_Nullable)(NSError * _Nullable error))completionHandler;
+- (void)enablePushNotificationsWithPushKitToken:(nullable NSData *)pushKitToken
+                          userNotificationToken:(nullable NSData *)userNotificationToken
+                                      isSandbox:(BOOL)isSandbox
+                              completionHandler:(void(^_Nullable)(NSError * _Nullable error))completionHandler;
 
 /**
  @brief  Disable push notification for current device
@@ -203,6 +255,21 @@ completionHandler:(void(^_Nullable)(NSError * _Nullable error, NXMCall * _Nullab
  }];
  */
 - (void)processNexmoPushWithUserInfo:(nonnull NSDictionary *)userInfo
-                   completionHandler:(void(^_Nullable)(NSError * _Nullable error))completionHandler;
+                   completionHandler:(void(^_Nullable)(NSError * _Nullable error))completionHandler __attribute((deprecated("Use processNexmoPushPayload instead.")));
+
+
+
+/**
+ @brief process Nexmo push event, Call this method when isNexmoPushWithUserInfo:userInfo return true
+ @param pushInfo    pushInfo
+ @code BOOL isNexmoPush = [myNXNClient isNexmoPushWithUserInfo:pushInfo];
+ if (isNexmoPush){
+ NXMPushPayload *pushPayload = [myNXNClient processNexmoPushPayload:pushInfo];
+ if (!pushPayload){
+    NSLog(@"Not a nexmo push");
+    return;
+ };
+ */
+- (nullable NXMPushPayload *)processNexmoPushPayload:(nonnull NSDictionary *)pushInfo;
 
 @end

@@ -9,8 +9,8 @@
 #import "NXMImageInfo.h"
 
 @interface NXMImageEvent : NXMMessageEvent
-@property (nonatomic, strong, nonnull) NSString *imageUuid;
-@property (nonatomic, strong, nonnull) NXMImageInfo *mediumImage;
-@property (nonatomic, strong, nonnull) NXMImageInfo *originalImage;
-@property (nonatomic, strong, nonnull) NXMImageInfo *thumbnailImage;
+@property (nonatomic, readonly, nonnull) NSString *imageUuid;
+@property (nonatomic, readonly, nonnull) NXMImageInfo *mediumImage;
+@property (nonatomic, readonly, nonnull) NXMImageInfo *originalImage;
+@property (nonatomic, readonly, nonnull) NXMImageInfo *thumbnailImage;
 @end

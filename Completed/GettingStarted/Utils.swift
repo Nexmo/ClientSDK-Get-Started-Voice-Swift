@@ -120,6 +120,8 @@ extension NXMConnectionStatusReason {
             return "Token expired"
         case .terminated:
             return "Terminated"
+        case .userNotFound:
+            return "User not found"
         @unknown default:
             return "Unknown"
         }

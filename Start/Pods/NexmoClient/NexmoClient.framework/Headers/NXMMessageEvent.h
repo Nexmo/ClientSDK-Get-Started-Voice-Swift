@@ -8,5 +8,5 @@
 #import "NXMEvent.h"
 
 @interface NXMMessageEvent : NXMEvent
-@property (nonatomic, strong,nonnull) NSMutableDictionary<NSNumber *,NSMutableDictionary<NSString *, NSDate *> *> *state;
+@property (nonatomic, readonly, nonnull) NSDictionary<NSNumber *, NSDictionary<NSString *, NSDate *> *> *state;
 @end

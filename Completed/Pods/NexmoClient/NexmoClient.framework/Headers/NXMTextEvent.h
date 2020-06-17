@@ -8,5 +8,5 @@
 #import "NXMMessageEvent.h"
 
 @interface NXMTextEvent : NXMMessageEvent
-@property (nonatomic, strong, nullable) NSString *text;
+@property (nonatomic, nullable, readonly) NSString *text;
 @end

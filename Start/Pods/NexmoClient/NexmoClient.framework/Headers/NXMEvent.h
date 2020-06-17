@@ -16,7 +16,7 @@
 @property (nonatomic, readonly, nullable) NXMMember *fromMember;
 @property (nonatomic, copy, nonnull) NSDate *creationDate;
 @property (nonatomic, copy, nullable) NSDate *deletionDate;
-@property NXMEventType type;
-@property NSInteger uuid;
+@property (nonatomic, readonly) NXMEventType type;
+@property (nonatomic, readonly) NSInteger uuid;
 
 @end
