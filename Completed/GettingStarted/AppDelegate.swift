@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         NXMLogger.setLogLevel(.verbose)
         askAudioPermissions()
+        let config = NXMClientConfig(apiUrl: "https://api.nexmo.com/", websocketUrl: "https://ws.nexmo.com/", ipsUrl: "https://api.nexmo.com/v1/image/", useFirstIceCandidate: true)
+        NXMClient.setConfiguration(config)
         return true
     }
 

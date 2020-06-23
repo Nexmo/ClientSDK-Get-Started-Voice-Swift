@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         NXMLogger.setLogLevel(.verbose)
+        let config = NXMClientConfig(apiUrl: "https://api.nexmo.com/", websocketUrl: "https://ws.nexmo.com/", ipsUrl: "https://api.nexmo.com/v1/image/", useFirstIceCandidate: true)
+        NXMClient.setConfiguration(config)
         askAudioPermissions()
         return true
     }
